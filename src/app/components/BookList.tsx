@@ -2,17 +2,25 @@
 import {
   addBook,
   deleteBook,
-  toggleModal,
+  toggleAddBookModal,
+  toggleUpdateBookModal,
+  setUpdateBookId,
 } from "../../redux/slices/booksSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/store";
-import { useState } from "react";
 import { Book } from "../../types/books";
 import AddBookModal from "./AddBookModal";
+import UpdateBookModal from "./UpdateBookModal";
 
 export default function Books() {
-  let addBookModalVisible = useAppSelector((state) => state.books.modalVisible);
+  let addBookModalVisible = useAppSelector(
+    (state) => state.books.addBookModalVisible,
+  );
+  let updateBookModalVisible = useAppSelector(
+    (state) => state.books.updateBookModalVisible,
+  );
   // console.log(addBookModalVisible);
   const bookList = useAppSelector((state) => state.books.books);
+  const updateBookId = useAppSelector((state) => state.books.updateBookId);
   const dispatch = useAppDispatch();
 
   const handleDelete = (id: number) => {
@@ -20,7 +28,12 @@ export default function Books() {
   };
 
   const handleAddBookModalToggle = () => {
-    dispatch(toggleModal());
+    dispatch(toggleAddBookModal());
+  };
+  const handleUpdateBookModalToggle = (bookId: number) => {
+    console.log(bookId, updateBookId);
+    dispatch(setUpdateBookId(bookId));
+    dispatch(toggleUpdateBookModal());
   };
 
   return (
@@ -32,6 +45,7 @@ export default function Books() {
         Add Book
       </button>
       {addBookModalVisible && <AddBookModal />}
+      {updateBookModalVisible && <UpdateBookModal bookId={updateBookId} />}
       <div className="flex w-full flex-col">
         <h1 className="m-auto mb-5 self-center text-4xl">Books</h1>
         {bookList ? (
@@ -39,17 +53,25 @@ export default function Books() {
             {bookList.map((book: Book) => (
               <div
                 key={book.id}
-                className="flex flex-col rounded bg-stone-300 p-2 mb-5"
+                className="mb-5 flex flex-col rounded bg-stone-300 p-2"
               >
                 <p className="m-auto mb-1 font-semibold">{book.title}</p>
                 <p className="m-auto mb-1">By: {book.author}</p>
                 <p className="m-1 mb-2">Summary: {book.description}</p>
-                <button
-                  className="m-auto mt-1 w-fit self-center rounded-lg bg-red-400 p-1"
-                  onClick={() => handleDelete(book.id)}
-                >
-                  Delete
-                </button>
+                <div className="flex justify-center">
+                  <button
+                    className="m-auto mt-1 w-fit self-center rounded-lg bg-green-400 p-1"
+                    onClick={() => handleUpdateBookModalToggle(book.id)}
+                  >
+                    Update
+                  </button>
+                  <button
+                    className="m-auto mt-1 w-fit self-center rounded-lg bg-red-400 p-1"
+                    onClick={() => handleDelete(book.id)}
+                  >
+                    Delete
+                  </button>
+                </div>
               </div>
             ))}
           </div>

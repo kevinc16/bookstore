@@ -2,6 +2,7 @@
 
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Book } from '../../types/books';
+import { act } from 'react-dom/test-utils';
 
 const sampleBook1: Book = {
   id: 1,
@@ -24,14 +25,25 @@ const sampleBook3: Book = {
   author: "Franz Kafka"
 }
 
+export const emptyBook: Book = {
+  id: -1,
+  title: "",
+  author: "",
+  description: "",
+}
+
 interface InitialState {
   books: Book[];
-  modalVisible: boolean
+  addBookModalVisible: boolean;
+  updateBookModalVisible: boolean;
+  updateBookId: number;
 }
 
 const initialState: InitialState = {
   books: [sampleBook1, sampleBook2, sampleBook3],
-  modalVisible: false
+  addBookModalVisible: false,
+  updateBookModalVisible: false,
+  updateBookId: 1
 };
 
 const bookSlice = createSlice({
@@ -46,15 +58,22 @@ const bookSlice = createSlice({
     },
     updateBook(state, action: PayloadAction<Book>) {
       const index = state.books.findIndex((book) => book.id === action.payload.id);
+      console.log(index, state.books[index])
       if (index !== -1) {
         state.books[index] = action.payload;
       }
     },
-    toggleModal(state) {
-      state.modalVisible = !state.modalVisible
-    }
+    toggleAddBookModal(state) {
+      state.addBookModalVisible = !state.addBookModalVisible
+    },
+    toggleUpdateBookModal(state) {
+      state.updateBookModalVisible = !state.updateBookModalVisible
+    },
+    setUpdateBookId(state, action: PayloadAction<number>) {
+      state.updateBookId = action.payload;
+    },
   },
 });
 
-export const { addBook, deleteBook, updateBook, toggleModal } = bookSlice.actions;
+export const { addBook, deleteBook, updateBook, toggleAddBookModal, toggleUpdateBookModal, setUpdateBookId } = bookSlice.actions;
 export default bookSlice.reducer;
