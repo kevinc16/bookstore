@@ -1,5 +1,7 @@
 import BookList from "./components/BookList";
 import { Metadata } from "next";
+import Image from "next/image";
+import pic from "../../public/pexels-emily-768125.jpg";
 
 export const metadata: Metadata = {
   title: "My Booklist",
@@ -7,7 +9,15 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center overflow-x-hidden p-16">
+    <main
+      className="flex min-h-screen flex-col items-center overflow-x-hidden p-16"
+      style={{
+        backgroundImage: `url("../../../pexels-emily-768125.jpg")`,
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
+      {/* <Image src={pic} alt="Picture of books"  /> */}
       <BookList />
     </main>
   );

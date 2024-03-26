@@ -37,7 +37,10 @@ export default function Books() {
   };
 
   return (
-    <div className="flex w-screen flex-col items-center">
+    <div
+      className="flex w-screen flex-col items-center"
+      
+    >
       <button
         className="mb-10 w-fit self-center rounded-lg border bg-amber-500 p-2"
         onClick={() => handleAddBookModalToggle()}
@@ -53,7 +56,7 @@ export default function Books() {
             {bookList.map((book: Book) => (
               <div
                 key={book.id}
-                className="mb-5 flex flex-col rounded bg-stone-300 p-2"
+                className="mb-5 flex flex-col rounded bg-stone-200 p-2"
               >
                 <p className="m-auto mb-1 font-semibold">{book.title}</p>
                 <p className="m-auto mb-1">By: {book.author}</p>
