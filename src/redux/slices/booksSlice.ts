@@ -3,19 +3,35 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Book } from '../../types/books';
 
-const sampleBook: Book = {
+const sampleBook1: Book = {
   id: 1,
   description: "Very cool",
-  title: "Wuthering Heights",
-  author: "???"
+  title: "One Hundred Years of Solitude",
+  author: "Gabriel García Márquez"
+}
+
+const sampleBook2: Book = {
+  id: 2,
+  description: "😮",
+  title: "Crime and Punishment",
+  author: "Fyodor Dostoevsky"
+}
+
+const sampleBook3: Book = {
+  id: 3,
+  description: "😵",
+  title: "The Castle",
+  author: "Franz Kafka"
 }
 
 interface InitialState {
   books: Book[];
+  modalVisible: boolean
 }
 
 const initialState: InitialState = {
-  books: [sampleBook],
+  books: [sampleBook1, sampleBook2, sampleBook3],
+  modalVisible: false
 };
 
 const bookSlice = createSlice({
@@ -34,8 +50,11 @@ const bookSlice = createSlice({
         state.books[index] = action.payload;
       }
     },
+    toggleModal(state) {
+      state.modalVisible = !state.modalVisible
+    }
   },
 });
 
-export const { addBook, deleteBook, updateBook } = bookSlice.actions;
+export const { addBook, deleteBook, updateBook, toggleModal } = bookSlice.actions;
 export default bookSlice.reducer;
