@@ -42,9 +42,10 @@ export default function BookModal({
       <form
         className="flex h-2/5 w-1/3 min-w-80 flex-col items-center justify-items-center rounded-lg bg-slate-300 p-10 drop-shadow-md"
         onSubmit={submit}
+        name="form"
       >
         <button
-          className="fixed right-0 top-0 mr-2 mt-2 p-1 hover:bg-slate-400 rounded-lg"
+          className="fixed right-0 top-0 mr-2 mt-2 rounded-lg p-1 hover:bg-slate-400"
           onClick={() => handleToggleModal()}
         >
           X
@@ -82,6 +83,7 @@ export default function BookModal({
           placeholder="Description"
           value={bookData.description}
           rows={4}
+          maxLength={500}
           className="m-1 w-full"
           onChange={(e) =>
             setBookData({ ...bookData, description: e.target.value })

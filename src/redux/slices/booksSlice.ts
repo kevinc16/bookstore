@@ -31,7 +31,7 @@ const sampleBook3: Book = {
 export const emptyBook: Book = {
   id: -1,
   title: "",
-  price: NaN,
+  price: NaN.toString(),
   description: "",
   category: ""
 }

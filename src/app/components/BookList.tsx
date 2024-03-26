@@ -70,7 +70,7 @@ export default function Books() {
                 >
                   <p className="m-auto mb-1 font-semibold">{book.title}</p>
                   <p className="m-auto mb-1">
-                    {book.price && formatter.format(book.price)}
+                    {book.price && formatter.format(Number(book.price))}
                   </p>
                   <p className="m-auto mb-1">Category: {book.category}</p>
                   <p className="m-1 mb-2">Description: {book.description}</p>

@@ -1,7 +1,5 @@
 import BookList from "./components/BookList";
 import { Metadata } from "next";
-import Image from "next/image";
-import pic from "../../public/pexels-emily-768125.jpg";
 
 export const metadata: Metadata = {
   title: "My Booklist",
