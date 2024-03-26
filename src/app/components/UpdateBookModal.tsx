@@ -28,15 +28,13 @@ export default function UpdateBookModal({ bookId }: { bookId: number }) {
   };
 
   const handleUpdateBook = (newBookData: Book) => {
-    if (!newBookData.title && !newBookData.description && !newBookData.author)
-      return;
-
     console.log(newBookData);
 
     const newBook: Book = {
       id: newBookData.id,
       title: newBookData.title,
-      author: newBookData.author,
+      price: newBookData.price,
+      category: newBookData.category,
       description: newBookData.description,
     };
 

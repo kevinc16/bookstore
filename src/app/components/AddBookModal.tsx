@@ -11,12 +11,11 @@ export default function AddBookModal() {
   };
 
   const handleAddBook = (bookData: Book) => {
-    if (!bookData.title && !bookData.description && !bookData.author) return;
-
     const newBook: Book = {
       id: Date.now(),
       title: bookData.title,
-      author: bookData.author,
+      price: bookData.price,
+      category: bookData.category,
       description: bookData.description,
     };
 

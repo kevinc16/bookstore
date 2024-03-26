@@ -8,28 +8,32 @@ const sampleBook1: Book = {
   id: 1,
   description: "Very cool",
   title: "One Hundred Years of Solitude",
-  author: "Gabriel García Márquez"
+  price: 1.23,
+  category: "History"
 }
 
 const sampleBook2: Book = {
   id: 2,
   description: "😮",
   title: "Crime and Punishment",
-  author: "Fyodor Dostoevsky"
+  price: 22,
+  category: "A"
 }
 
 const sampleBook3: Book = {
   id: 3,
   description: "😵",
   title: "The Castle",
-  author: "Franz Kafka"
+  price: 3.22,
+  category: "A"
 }
 
 export const emptyBook: Book = {
   id: -1,
   title: "",
-  author: "",
+  price: NaN,
   description: "",
+  category: ""
 }
 
 interface InitialState {

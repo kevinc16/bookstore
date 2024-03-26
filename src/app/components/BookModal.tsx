@@ -28,7 +28,7 @@ export default function BookModal({
   const submit = (e: any) => {
     e.preventDefault();
 
-    if (!bookData.title && !bookData.description && !bookData.author) return;
+    // if (!bookData.title && !bookData.description && !bookData.price) return;
 
     handleSubmit(bookData);
 
@@ -38,14 +38,19 @@ export default function BookModal({
 
   return (
     <div className="absolute inset-0 flex items-center justify-center bg-slate-500/35">
-      <div className="flex h-2/5 w-1/3 min-w-80 flex-col items-center justify-items-center rounded-lg bg-slate-300 p-10 drop-shadow-md backdrop-opacity-0">
+      {/* <div className="flex h-full w-full items-center justify-center"> */}
+      <form
+        className="flex h-2/5 w-1/3 min-w-80 flex-col items-center justify-items-center rounded-lg bg-slate-300 p-10 drop-shadow-md"
+        onSubmit={submit}
+      >
         <button
-          className="fixed right-0 top-0 mr-2 mt-2 p-1"
+          className="fixed right-0 top-0 mr-2 mt-2 p-1 hover:bg-slate-400 rounded-lg"
           onClick={() => handleToggleModal()}
         >
           X
         </button>
         <input
+          required
           type="text"
           className="m-1 w-full"
           placeholder="Title"
@@ -53,13 +58,27 @@ export default function BookModal({
           onChange={(e) => setBookData({ ...bookData, title: e.target.value })}
         />
         <input
+          required
+          type="number"
+          className="m-1 w-full"
+          placeholder="Price"
+          value={bookData.price}
+          onChange={(e) =>
+            setBookData({ ...bookData, price: Number(e.target.value) })
+          }
+        />
+        <input
+          required
           type="text"
           className="m-1 w-full"
-          placeholder="Author"
-          value={bookData.author}
-          onChange={(e) => setBookData({ ...bookData, author: e.target.value })}
+          placeholder="Category"
+          value={bookData.category}
+          onChange={(e) =>
+            setBookData({ ...bookData, category: e.target.value })
+          }
         />
         <textarea
+          required
           placeholder="Description"
           value={bookData.description}
           rows={4}
@@ -69,12 +88,13 @@ export default function BookModal({
           }
         ></textarea>
         <button
-          className="m-auto w-fit rounded-lg bg-amber-500 p-2"
-          onClick={submit}
+          className="m-auto w-fit rounded-lg bg-amber-400 p-2 hover:bg-amber-500"
+          onSubmit={submit}
         >
           {buttonText}
         </button>
-      </div>
+      </form>
     </div>
+    // </div>
   );
 }
